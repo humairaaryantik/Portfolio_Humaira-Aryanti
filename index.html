@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humaira Aryanti K - Data Analyst Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome & DevIcon for Software Logos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#1e3a8a',
+                            900: '#172554',
+                            950: '#0a1033', // Deep navy for dominant text/buttons
+                        },
+                        pinkBg: '#fdf2f8', // Tailwind pink-50
+                        pinkAccent: '#fce7f3' // Tailwind pink-100
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-pinkBg text-navy-950 antialiased selection:bg-navy-900 selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-card border-b border-pink-200 transition-all duration-300 py-4 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-tight text-navy-950 hover:text-navy-800 transition">
+                Humaira <span class="text-pink-500">Aryanti K</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#about" class="hover:text-pink-600 transition">About</a>
+                <a href="#experience" class="hover:text-pink-600 transition">Experience</a>
+                <a href="#projects" class="hover:text-pink-600 transition">Projects</a>
+                <a href="#skills" class="hover:text-pink-600 transition">Skills</a>
+                <a href="#contact" class="hover:text-pink-600 transition">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-navy-950 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-pink-200 shadow-lg flex flex-col items-center py-4 space-y-4 font-medium">
+            <a href="#about" class="mobile-link text-navy-900 hover:text-pink-600">About</a>
+            <a href="#experience" class="mobile-link text-navy-900 hover:text-pink-600">Experience</a>
+            <a href="#projects" class="mobile-link text-navy-900 hover:text-pink-600">Projects</a>
+            <a href="#skills" class="mobile-link text-navy-900 hover:text-pink-600">Skills</a>
+            <a href="#contact" class="mobile-link text-navy-900 hover:text-pink-600">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="flex items-center justify-center pt-28 pb-16 px-6 md:px-12 relative overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute top-20 -left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-40 -right-20 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-center gap-10 lg:gap-14 text-left relative z-10 w-full">
+            
+            <!-- Left Column: Sleek Photo Container with Image Upload -->
+            <div class="flex-shrink-0 relative group">
+                <div class="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-3xl p-1 bg-gradient-to-tr from-pink-500 via-navy-800 to-pink-300 shadow-xl shadow-pink-500/15 transition-all duration-500 group-hover:shadow-pink-500/30">
+                    <!-- Image Wrapper -->
+                    <div class="w-full h-full rounded-[22px] overflow-hidden bg-white relative">
+                        <img id="profile-img-preview" 
+                             src="https://i.imgur.com/phODonw.jpeg" 
+                             alt="Humaira Aryanti Khaidir" 
+                             class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'">
+                        
+                        <!-- Upload Hover Overlay -->
+                        <div id="upload-trigger" class="absolute inset-0 bg-navy-950/70 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white cursor-pointer p-4 text-center">
+                            <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center mb-2 shadow-lg">
+                                <i class="fas fa-camera text-lg"></i>
+                            </div>
+                            <span class="text-xs font-semibold tracking-wide">Upload Foto</span>
+                            <span class="text-[10px] text-pink-200 mt-0.5">Klik untuk ganti gambar</span>
+                        </div>
+                    </div>
+
+                    <!-- Hidden File Input -->
+                    <input type="file" id="avatar-input" class="hidden" accept="image/*">
+                </div>
+            </div>
+
+            <!-- Right Column: Left-Aligned Content -->
+            <div class="flex-1 text-left">
+                <div class="inline-block px-4 py-1 rounded-full bg-pink-100 text-pink-600 font-semibold text-sm mb-5 border border-pink-200 shadow-sm">
+                    Data & Business Analyst
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 text-navy-950 leading-tight">
+                    Finding the Story <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-navy-800 to-pink-500">Behind the Data</span>
+                </h1>
+                <p class="text-base sm:text-lg text-navy-800/80 mb-8 max-w-2xl leading-relaxed">
+                    Hi, I'm <span class="font-bold text-navy-900">Humaira Aryanti Khaidir</span>. Data Analytics enthusiast turning complex datasets into actionable business insights using Excel, SQL, Python, Tableau, and Power BI.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                    <a href="#projects" class="w-full sm:w-auto px-8 py-3.5 bg-navy-950 text-white rounded-full font-medium hover:bg-navy-800 hover:shadow-lg transition duration-300 text-center transform hover:-translate-y-0.5">
+                        View My Work
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 bg-transparent border-2 border-navy-950 text-navy-950 rounded-full font-medium hover:bg-navy-50 transition duration-300 text-center">
+                        Get in Touch
+                    </a>
+                </div>
+                
+                <div class="mt-8 flex items-center gap-4">
+                    <a href="https://linkedin.com/in/humaira-aryantik" target="_blank" title="LinkedIn" class="w-11 h-11 flex items-center justify-center rounded-full bg-white text-navy-950 shadow-sm hover:shadow-md hover:bg-pink-500 hover:text-white hover:-translate-y-1 transition duration-300">
+                        <i class="fab fa-linkedin-in text-lg"></i>
+                    </a>
+                    <a href="https://github.com/humairaaryantik" target="_blank" title="GitHub" class="w-11 h-11 flex items-center justify-center rounded-full bg-white text-navy-950 shadow-sm hover:shadow-md hover:bg-pink-500 hover:text-white hover:-translate-y-1 transition duration-300">
+                        <i class="fab fa-github text-lg"></i>
+                    </a>
+                    <a href="mailto:humairaaryantik@gmail.com" title="Email" class="w-11 h-11 flex items-center justify-center rounded-full bg-white text-navy-950 shadow-sm hover:shadow-md hover:bg-pink-500 hover:text-white hover:-translate-y-1 transition duration-300">
+                        <i class="fas fa-envelope text-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <div class="w-full bg-pink">
+                <div class="px-8 md:px-12 lg:px-16 py-5">
+                    <div class="bg-white p-10 rounded-2xl shadow-sm border border-pink-100 hover:shadow-lg hover:-translate-y-1 transition duration-300">
+                
+                <h4 class="text-2xl md:text-3xl font-bold text-navy-950 mb-6 flex items-center gap-3">
+                    <i class="fas fa-user-graduate text-pink-500"></i> Education
+                </h4>
+                
+                <div class="relative z-10 space-y-4">
+                    <div>
+                        <h5 class="text-xl font-bold text-navy-900">Bachelor of Science – Geophysics</h5>
+                        <p class="text-pink-600 font-semibold">Universitas Andalas | 2021 – 2025</p>
+                        <span class="inline-block mt-1 text-xs font-bold px-3 py-1 bg-pink-100 text-pink-700 rounded-full">GPA: 3.61 / 4.00 (Cum Laude)</span>
+                    </div>
+
+                    <div class="pt-4 border-t border-pink-200/60">
+                        <h6 class="font-bold text-navy-950 text-sm uppercase tracking-wide mb-1">Final Thesis Project:</h6>
+                        <p class="text-gray-700 text-sm font-medium italic mb-3">
+                            Seismic Data Analysis for Slip Surface Identification in Riverbank Development Areas
+                        </p>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-start"><i class="fas fa-check-circle text-pink-500 text-xs mt-1 mr-2 flex-shrink-0"></i> Processed and analyzed 10,000+ seismic datasets, ensuring data quality through structured cleaning and validation.</li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-pink-500 text-xs mt-1 mr-2 flex-shrink-0"></i> Developed visual models of slip surfaces using Surfer and QGIS for spatial interpretation.</li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-pink-500 text-xs mt-1 mr-2 flex-shrink-0"></i> Performed data-driven analysis to evaluate land stability and mitigate geohazards.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-10 px-6 md:px-12 bg-pinkBg relative">
+        <div class="w-full bg-pink">
+            <div class="text-left mb-16">
+                <h3 class="text-3xl md:text-4xl font-bold text-navy-950">Professional Experience</h3>
+            </div>
+
+            <!-- LinkedIn-Style Single Column Experience Feed -->
+            <div class="space-y-8">
+                
+                <!-- Experience Item 1: ALVA -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-pink-100 hover:shadow-md transition">
+                    <div class="flex gap-4 items-start">
+                        <!-- Company Logo Image -->
+                        <img src="https://i.imgur.com/g7EVLQX.jpeg" 
+                             alt="ALVA Digital Network Logo" 
+                             class="w-12 h-12 md:w-14 md:h-14 rounded-xl object-cover bg-navy-950 p-1 shadow-sm border border-pink-100 flex-shrink-0">
+                        <div class="flex-1">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                                <h4 class="text-xl font-bold text-navy-950">Data Analyst Intern</h4>
+                                <span class="text-xs font-semibold px-3 py-1 bg-pink-100 text-pink-700 rounded-full w-fit">May 2026 - Present</span>
+                            </div>
+                            <p class="text-sm font-medium text-navy-800">ALVA Digital Network</p>
+                            <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                                <i class="fas fa-map-marker-alt text-pink-500"></i> South Jakarta, Jakarta
+                            </p>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Item 2: J&T -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-pink-100 hover:shadow-md transition">
+                    <div class="flex gap-4 items-start">
+                        <!-- J&T Logo Image -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Logo_J%26T_Merah_Square.jpg?utm_source=id.wikipedia.org&utm_campaign=index&utm_content=original" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=120&q=80'"
+                             alt="J&T Express Logo" 
+                             class="w-12 h-12 md:w-14 md:h-14 rounded-xl object-contain bg-white p-1.5 shadow-sm border border-pink-100 flex-shrink-0">
+                        <div class="flex-1">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                                <h4 class="text-xl font-bold text-navy-950">Admin Operational</h4>
+                                <span class="text-xs font-semibold px-3 py-1 bg-gray-100 text-gray-700 rounded-full w-fit">Oct 2025 - Dec 2025 · 3 mos</span>
+                            </div>
+                            <p class="text-sm font-medium text-navy-800">PT Global Jet Express Indonesia (J&T Express)</p>
+                            <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                                <i class="fas fa-map-marker-alt text-pink-500"></i> Payakumbuh, West Sumatera
+                            </p>
+                            
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Item 3: Zona EBT -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-pink-100 hover:shadow-md transition">
+                    <div class="flex gap-4 items-start">
+                        <!-- Zona EBT Logo Image -->
+                        <img src="https://zonaebt.com/wp-content/uploads/LogoZonaEBT_Prt-e1683005275748.png"
+                             alt="Zona EBT Logo" 
+                             class="w-12 h-12 md:w-14 md:h-14 rounded-xl object-cover bg-emerald-600 p-0.5 shadow-sm border border-pink-100 flex-shrink-0">
+                        <div class="flex-1">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                                <h4 class="text-xl font-bold text-navy-950">Media Partnership Intern</h4>
+                                <span class="text-xs font-semibold px-3 py-1 bg-gray-100 text-gray-700 rounded-full w-fit">Dec 2023 - Jun 2024 · 7 mos</span>
+                            </div>
+                            <p class="text-sm font-medium text-navy-800">Zona Energi Baru Terbarukan (EBT)</p>
+                            <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                                <i class="fas fa-laptop-house text-pink-500"></i> Remote
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Group: Universitas Andalas (LinkedIn Nested Group) -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-pink-100 hover:shadow-md transition">
+                    <div class="flex gap-4 items-start">
+                        <!-- Unand Logo Image -->
+                        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Logo_Unand.svg/500px-Logo_Unand.svg.png?utm_source=id.wikipedia.org&utm_campaign=index&utm_content=thumbnail" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=120&q=80'"
+                             alt="Universitas Andalas Logo" 
+                             class="w-12 h-12 md:w-14 md:h-14 rounded-xl object-contain bg-white p-1 shadow-sm border border-pink-100 flex-shrink-0">
+            
+                        <div class="flex-1">
+                                                  <div class="flex-1">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                                <h4 class="text-xl font-bold text-navy-950">Universitas Andalas</h4>
+                                <span class="text-xs font-semibold px-3 py-1 bg-gray-100 text-gray-700 rounded-full w-fit">2 yr 1 mos</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                                <i class="fas fa-map-marker-alt text-pink-500"></i> Padang, West Sumatera
+                            </p>
+                            
+
+                            <!-- Sub-timeline connector line -->
+                            <div class="mt-6 space-y-8 relative before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-pink-200">
+                                
+                                <!-- Sub Role 1 -->
+                                <div class="relative pl-8">
+                                    <div class="absolute left-1 top-1.5 w-3 h-3 rounded-full bg-pink-500 border-2 border-white"></div>
+                                    <h5 class="text-base font-bold text-navy-950">Assistant Secretary</h5>
+                                    <p class="text-sm text-navy-800"> Advance Physics Laboratory Assistant 
+                                    <p class="text-xs font-semibold text-gray-500">Aug 2024 - Jul 2025 </p>
+                                </div>
+
+                                <!-- Sub Role 2 -->
+                                <div class="relative pl-8">
+                                    <div class="absolute left-1 top-1.5 w-3 h-3 rounded-full bg-pink-500 border-2 border-white"></div>
+                                    <h5 class="text-base font-bold text-navy-950">Head of Assistant Publication & Relation</h5>
+                                    <p class="text-sm text-navy-800"> Computer Physics Laboratory Assistant
+                                    <p class="text-xs font-semibold text-gray-500">Sep 2023 - Jul 2025 </p>
+                                    </p>
+   
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (Horizontal Scroll for 5 Projects) -->
+    <section id="projects" class="py-12 px-6 md:px-12 bg-pink overflow-hidden">
+        <div class="w-full bg-pink">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <h2 class="text-sm font-bold tracking-widest text-pink-500 uppercase mb-2">Portfolio</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-navy-950">Data Analytics Projects</h3>
+                </div>
+                
+                <!-- Scroll Controls & Indicator -->
+                <div class="flex items-center gap-3">
+                    <span class="text-xs text-navy-800/70 font-semibold hidden sm:inline-block mr-2">
+                        <i class="fas fa-hand-pointer mr-1"></i> Swipe or scroll horizontal
+                    </span>
+                    <button id="proj-scroll-left" aria-label="Scroll left" class="w-10 h-10 rounded-full bg-white border border-pink-200 text-navy-950 flex items-center justify-center hover:bg-pink-500 hover:text-white hover:border-pink-500 transition shadow-sm">
+                        <i class="fas fa-chevron-left text-sm"></i>
+                    </button>
+                    <button id="proj-scroll-right" aria-label="Scroll right" class="w-10 h-10 rounded-full bg-white border border-pink-200 text-navy-950 flex items-center justify-center hover:bg-pink-500 hover:text-white hover:border-pink-500 transition shadow-sm">
+                        <i class="fas fa-chevron-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Horizontal Scroll Track (5 Projects) -->
+            <div id="projects-track" class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 no-scrollbar scroll-smooth">
+                
+                   <!-- Project 5 (New Project to complete 5 projects) -->
+                <div class="w-[85vw] sm:w-[380px] md:w-[420px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52 bg-navy-950">
+                            <img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="E-Commerce Customer Segmentation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                                <span class="text-xs font-semibold px-3 py-1 bg-pink-500 rounded-full">Fraud and Risk</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">Pivot</span>
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">G-sheets</span>
+
+                            </div>
+                            <h4 class="text-xl font-bold text-navy-950 mb-2 group-hover:text-pink-600 transition duration-300">Credit Card Fraud Detection</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Identify fraud pattern and uncover risk factors that contribute to fradulent credit card transaction.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://drive.google.com/file/d/1_Fa5twyjG6w4WCGOT62_ZtI-ov9LfS_F/view?usp=sharing" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Project Details <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 1 -->
+                <div class="w-[85vw] sm:w-[380px] md:w-[420px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52 bg-navy-950">
+                            <img src="https://images.unsplash.com/photo-1584414617465-a2f4085a853c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDMwfHx8ZW58MHx8fHx8" alt="Java Tourism Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                                <span class="text-xs font-semibold px-3 py-1 bg-pink-500 rounded-full">Business</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">MySQL</span>
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">Python</span>
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">Power BI</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-navy-950 mb-2 group-hover:text-pink-600 transition duration-300">Exploring Tourism Trends on Java Island</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Developed an interactive Power BI dashboard analyzing 437 destinations across 5 cities.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://github.com/humairaaryantik/Tourism-Analytics-Dashboard/blob/cacfe386638573c2d47ce6ca041fec2f981be4b6/README.md" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Project Details <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="w-[85vw] sm:w-[380px] md:w-[420px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52 bg-navy-950">
+                            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Bike Store Analytics" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                                <span class="text-xs font-semibold px-3 py-1 bg-pink-500 rounded-full">Sales</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">MySQL</span>
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">Excel</span>
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">Tableau</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-navy-950 mb-2 group-hover:text-pink-600 transition duration-300">Bike Store Sales Analysis</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Extracted and analyzed sales performance metrics using SQL queries, cleaned data via Excel Pivot Tables, and created a dynamic Tableau dashboard showcasing sales revenue segmented.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://github.com/humairaaryantik/Bike-Stores-Sales-Dashboard/blob/358e2d92bedd400c262c187aeba6a87a830cd5d5/README.md" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Project Details <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="w-[85vw] sm:w-[380px] md:w-[420px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52 bg-navy-950">
+                            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80" alt="GameZone Customer Analytics" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                                <span class="text-xs font-semibold px-3 py-1 bg-pink-500 rounded-full">Customer Behavior</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">Excel</span>
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">Tableau</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-navy-950 mb-2 group-hover:text-pink-600 transition duration-300">Custumer Behavior Analysis</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Processed over 17,000 transaction records to analyze customer purchasing habits and channel preferences and built an interactive Tableau dashboard for product bundling strategies.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://github.com/humairaaryantik/GameZone-Customer-Purchase-Behavior-Analysis/blob/b283bc94208019b35c01515ef800a3e51ca2ffb2/README.md" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Project Details <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="w-[85vw] sm:w-[380px] md:w-[420px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-52 bg-navy-950">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Sales Performance Analysis" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                                <span class="text-xs font-semibold px-3 py-1 bg-pink-500 rounded-full">Sales & Marketing</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-2.5 py-0.5 bg-navy-950 text-white text-xs font-semibold rounded-md">Microsoft Excel</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-navy-950 mb-2 group-hover:text-pink-600 transition duration-300">Sales & Marketing Performance Analysis</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                Track sales funnel health, measure campaign performance across categories, and evaluate revenue trends.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://github.com/humairaaryantik/Sales-Marketing-Performance-Analytics/blob/727c4029ff51d70a80872a4dc675c969063faf4b/README.md" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Project Details <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Certifications Section (Horizontal Scrolling Layouts) -->
+    <section id="skills" class="py-16 px-6 md:px-12 bg-pinkBg">
+        <div class="w-full bg-pink">
+            
+            <!-- Expertise (Technical Skills & Software) Horizontal Track -->
+            <div>
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-navy-950">Technical Skills & Software</h3>
+                    </div>
+                    
+                    <!-- Scroll Controls -->
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs text-navy-800/70 font-semibold hidden sm:inline-block mr-1">
+                            Geser untuk lihat keahlian
+                        </span>
+                        <button id="skills-scroll-left" aria-label="Scroll skills left" class="w-9 h-9 rounded-full bg-white border border-pink-200 text-navy-950 flex items-center justify-center hover:bg-pink-500 hover:text-white hover:border-pink-500 transition shadow-sm">
+                            <i class="fas fa-chevron-left text-xs"></i>
+                        </button>
+                        <button id="skills-scroll-right" aria-label="Scroll skills right" class="w-9 h-9 rounded-full bg-white border border-pink-200 text-navy-950 flex items-center justify-center hover:bg-pink-500 hover:text-white hover:border-pink-500 transition shadow-sm">
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Skills Horizontal Scroll -->
+                <div id="skills-track" class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 no-scrollbar scroll-smooth">
+                    <!-- Python -->
+                    <div class="w-40 sm:w-48 flex-shrink-0 snap-start bg-white p-6 rounded-2xl shadow-sm border border-pink-100 flex flex-col items-center text-center hover:-translate-y-1 transition group">
+                        <i class="devicon-python-plain colored text-5xl mb-3 group-hover:scale-110 transition duration-300"></i>
+                        <span class="text-sm font-bold text-navy-950">Python</span>
+                        <span class="text-[11px] text-gray-500 mt-1">Data Processing</span>
+                    </div>
+                    <!-- MySQL -->
+                    <div class="w-40 sm:w-48 flex-shrink-0 snap-start bg-white p-6 rounded-2xl shadow-sm border border-pink-100 flex flex-col items-center text-center hover:-translate-y-1 transition group">
+                        <i class="devicon-mysql-plain colored text-5xl mb-3 group-hover:scale-110 transition duration-300"></i>
+                        <span class="text-sm font-bold text-navy-950">MySQL</span>
+                        <span class="text-[11px] text-gray-500 mt-1">Database Queries</span>
+                    </div>
+                    <!-- Power BI -->
+                    <div class="w-40 sm:w-48 flex-shrink-0 snap-start bg-white p-6 rounded-2xl shadow-sm border border-pink-100 flex flex-col items-center text-center hover:-translate-y-1 transition group">
+                        <div class="w-12 h-12 text-amber-500 flex items-center justify-center font-black text-3xl mb-2 group-hover:scale-110 transition duration-300">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <span class="text-sm font-bold text-navy-950">Power BI</span>
+                        <span class="text-[11px] text-gray-500 mt-1">Dashboard Development</span>
+                    </div>
+                    <!-- Tableau -->
+                    <div class="w-40 sm:w-48 flex-shrink-0 snap-start bg-white p-6 rounded-2xl shadow-sm border border-pink-100 flex flex-col items-center text-center hover:-translate-y-1 transition group">
+                        <div class="w-12 h-12 text-blue-600 flex items-center justify-center font-black text-3xl mb-2 group-hover:scale-110 transition duration-300">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <span class="text-sm font-bold text-navy-950">Tableau</span>
+                        <span class="text-[11px] text-gray-500 mt-1">Data Visualization</span>
+                    </div>
+                    <!-- Excel -->
+                    <div class="w-40 sm:w-48 flex-shrink-0 snap-start bg-white p-6 rounded-2xl shadow-sm border border-pink-100 flex flex-col items-center text-center hover:-translate-y-1 transition group">
+                        <i class="devicon-excel-plain colored text-5xl mb-3 group-hover:scale-110 transition duration-300"></i>
+                        <span class="text-sm font-bold text-navy-950">Excel/Spreadsheets</span>
+                        <span class="text-[11px] text-gray-500 mt-1">Pivot & Formulas</span>
+                    </div>
+                    <!-- QGIS -->
+                    <div class="w-40 sm:w-48 flex-shrink-0 snap-start bg-white p-6 rounded-2xl shadow-sm border border-pink-100 flex flex-col items-center text-center hover:-translate-y-1 transition group">
+                        <i class="devicon-qgis-plain colored text-5xl mb-3 group-hover:scale-110 transition duration-300"></i>
+                        <span class="text-sm font-bold text-navy-950">QGIS & Software Surfer</span>
+                        <span class="text-[11px] text-gray-500 mt-1">Spatial Mapping</span>
+                    </div>
+                    <!-- Canva -->
+                    <div class="w-40 sm:w-48 flex-shrink-0 snap-start bg-white p-6 rounded-2xl shadow-sm border border-pink-100 flex flex-col items-center text-center hover:-translate-y-1 transition group">
+                        <i class="devicon-canva-original colored text-5xl mb-3 group-hover:scale-110 transition duration-300"></i>
+                        <span class="text-sm font-bold text-navy-950">Canva</span>
+                        <span class="text-[11px] text-gray-500 mt-1">Visual Design</span>
+                    </div>
+                    <!-- Notion -->
+                    <div class="w-40 sm:w-48 flex-shrink-0 snap-start bg-white p-6 rounded-2xl shadow-sm border border-pink-100 flex flex-col items-center text-center hover:-translate-y-1 transition group">
+                        <i class="devicon-notion-plain text-5xl text-navy-950 mb-3 group-hover:scale-110 transition duration-300"></i>
+                        <span class="text-sm font-bold text-navy-950">Notion</span>
+                        <span class="text-[11px] text-gray-500 mt-1">Documentation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications Horizontal Track -->
+            <div>
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-navy-950">Certification</h3>
+                    </div>
+
+                    <!-- Scroll Controls -->
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs text-navy-800/70 font-semibold hidden sm:inline-block mr-1">
+                            Geser sertifikat
+                        </span>
+                        <button id="certs-scroll-left" aria-label="Scroll certs left" class="w-9 h-9 rounded-full bg-white border border-pink-200 text-navy-950 flex items-center justify-center hover:bg-pink-500 hover:text-white hover:border-pink-500 transition shadow-sm">
+                            <i class="fas fa-chevron-left text-xs"></i>
+                        </button>
+                        <button id="certs-scroll-right" aria-label="Scroll certs right" class="w-9 h-9 rounded-full bg-white border border-pink-200 text-navy-950 flex items-center justify-center hover:bg-pink-500 hover:text-white hover:border-pink-500 transition shadow-sm">
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Certifications Horizontal Scroll -->
+                <div id="certs-track" class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 no-scrollbar scroll-smooth">
+                
+                   <!-- Certification 1 (power BI for beginner-->
+                <div class="w-[50vw] sm:w-[200px] md:w-[390px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-30 bg-navy-950">
+                            <img src="https://media.licdn.com/dms/image/v2/D562DAQHXcniH9Ki26w/profile-treasury-image-shrink_1280_1280/B56Z0bsQTfHwAU-/0/1774286080346?e=1790600400&v=beta&t=QmleFq4zjFkEVfBg3cgZx5jQ_jMYcY9bKISuvGAbJpY" alt="E-Commerce Customer Segmentation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-navy-950 mb-0 group-hover:text-pink-600 transition duration-300">Power BI for Beginner</h4>
+                            <p class="text-navy-800 text-sm leading-relaxed">
+                                Simplilearn (2026)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <a href="https://media.licdn.com/dms/image/v2/D562DAQHXcniH9Ki26w/profile-treasury-image-shrink_1280_1280/B56Z0bsQTfHwAU-/0/1774286080346?e=1790600400&v=beta&t=QmleFq4zjFkEVfBg3cgZx5jQ_jMYcY9bKISuvGAbJpY" target="_blank" class="inline-flex items-center gap-0 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Certificate <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                   <!-- Certification 2 (Relational Database & SQL-->
+                <div class="w-[50vw] sm:w-[200px] md:w-[390px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-30 bg-navy-950">
+                            <img src="https://media.licdn.com/dms/image/v2/D562DAQHImixlGWD9FA/profile-treasury-image-shrink_1280_1280/B56Zxx5UZRHgAU-/0/1771437378212?e=1790604000&v=beta&t=T9RKiFpkQin_1QCTHULEGKBx2OXFspOPWp1_s1FhuIc" alt="E-Commerce Customer Segmentation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-navy-950 mb-0 group-hover:text-pink-600 transition duration-300">Relational Database & SQL </h4>
+                            <p class="text-navy-800 text-sm leading-relaxed">
+                                Udemy (2026)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <a href="https://media.licdn.com/dms/image/v2/D562DAQHImixlGWD9FA/profile-treasury-image-shrink_1280_1280/B56Zxx5UZRHgAU-/0/1771437378212?e=1790604000&v=beta&t=T9RKiFpkQin_1QCTHULEGKBx2OXFspOPWp1_s1FhuIc" target="_blank" class="inline-flex items-center gap-0 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Certificate <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>                
+
+                   <!-- Certification 3 (excel trainee-->
+                <div class="w-[50vw] sm:w-[200px] md:w-[390px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-30 bg-navy-950">
+                            <img src="https://media.licdn.com/dms/image/v2/D562DAQEG4dilqED9IQ/profile-treasury-document-images_1280/B56Zv.yEyrHIAU-/1/1769506100198?e=1790812800&v=beta&t=8qeMp96KsDvWyMTgF1SmRWUFTjE5IhvXsHwz4iROlEY" alt="E-Commerce Customer Segmentation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-navy-950 mb-0 group-hover:text-pink-600 transition duration-300">Excel trainee for Employee & Jobseeker </h4>
+                            <p class="text-navy-800 text-sm leading-relaxed">
+                                Seratus Ilmu Training (2026)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <a href="https://media.licdn.com/dms/image/v2/D562DAQEG4dilqED9IQ/profile-treasury-document-images_1280/B56Zv.yEyrHIAU-/1/1769506100198?e=1790812800&v=beta&t=8qeMp96KsDvWyMTgF1SmRWUFTjE5IhvXsHwz4iROlEY" target="_blank" class="inline-flex items-center gap-0 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Certificate <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div> 
+
+                   <!-- Certification 4 (Intro to Data Analytics-->
+                <div class="w-[50vw] sm:w-[200px] md:w-[390px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-30 bg-navy-950">
+                            <img src="https://media.licdn.com/dms/image/v2/D562DAQG8NK4kfIO9Kg/profile-treasury-image-shrink_1920_1920/B56ZwFCj37IYAc-/0/1769611085560?e=1790604000&v=beta&t=4nDh97r6VEWAPfJ7GXF9pU4S4V6xDKXNCS0sMWGCQr0" alt="E-Commerce Customer Segmentation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-navy-950 mb-0 group-hover:text-pink-600 transition duration-300">Intro to Data Analytics </h4>
+                            <p class="text-navy-800 text-sm leading-relaxed">
+                                Revo u (2026)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <a href="https://media.licdn.com/dms/image/v2/D562DAQG8NK4kfIO9Kg/profile-treasury-image-shrink_1920_1920/B56ZwFCj37IYAc-/0/1769611085560?e=1790604000&v=beta&t=4nDh97r6VEWAPfJ7GXF9pU4S4V6xDKXNCS0sMWGCQr0" target="_blank" class="inline-flex items-center gap-0 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Certificate <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div> 
+
+                   <!-- Certification 5 (Advanced Physics Laboratory-->
+                <div class="w-[50vw] sm:w-[200px] md:w-[390px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-30 bg-navy-950">
+                            <img src="https://i.imgur.com/yhXDEIm.jpeg" alt="E-Commerce Customer Segmentation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-navy-950 mb-0 group-hover:text-pink-600 transition duration-300">Secretary Asistant</h4>
+                            <p class="text-navy-800 text-sm leading-relaxed">
+                                 Advanced Physics Laboratory (2024/2025)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <a href="https://i.imgur.com/yhXDEIm.jpeg" target="_blank" class="inline-flex items-center gap-0 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Certificate <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div> 
+
+                   <!-- Certification 6 (Computer Physics Laboratory-->
+                <div class="w-[50vw] sm:w-[200px] md:w-[390px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-30 bg-navy-950">
+                            <img src="https://i.imgur.com/dfZrnko.png" alt="E-Commerce Customer Segmentation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-navy-950 mb-0 group-hover:text-pink-600 transition duration-300">Asistant Laboratory</h4>
+                            <p class="text-navy-800 text-sm leading-relaxed">
+                                 Computer Physics Laboratory (2023-2025)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <a href="https://i.imgur.com/dfZrnko.png" target="_blank" class="inline-flex items-center gap-0 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Certificate <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                   <!-- Certification 7 (Team Leader PKM-RE-->
+                <div class="w-[50vw] sm:w-[200px] md:w-[390px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-30 bg-navy-950">
+                            <img src="https://i.imgur.com/Z2Tt8Xe.jpeg" alt="E-Commerce Customer Segmentation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-navy-950 mb-0 group-hover:text-pink-600 transition duration-300">Team Leader PKM-RE Seismic Reciprocal</h4>
+                            <p class="text-navy-800 text-sm leading-relaxed">
+                                 Kemdikbudristek (2024)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <a href="https://i.imgur.com/Z2Tt8Xe.jpeg" target="_blank" class="inline-flex items-center gap-0 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Certificate <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>  
+
+                   <!-- Certification 8 (Staff PKM-RE-->
+                <div class="w-[50vw] sm:w-[200px] md:w-[390px] flex-shrink-0 snap-start group border border-pink-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden h-30 bg-navy-950">
+                            <img src="https://i.imgur.com/Z3XsPEz.jpeg" alt="E-Commerce Customer Segmentation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white">
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-navy-950 mb-0 group-hover:text-pink-600 transition duration-300">Staff PKM-RE Air Polution</h4>
+                            <p class="text-navy-800 text-sm leading-relaxed">
+                                 Kemdikbudristek (2023)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <a href="https://i.imgur.com/en8ykhL.jpeg" target="_blank" class="inline-flex items-center gap-0 text-sm font-semibold text-pink-600 hover:text-navy-950 transition">
+                            View Certificate <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div> 
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 md:px-12 bg-navy-950 text-white relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-900 rounded-full mix-blend-screen filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-pink-900 rounded-full mix-blend-screen filter blur-3xl opacity-30 translate-y-1/2 -translate-x-1/2"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Connect!</h2>
+            <p class="text-lg text-blue-100 mb-12 max-w-2xl mx-auto font-light">
+                Whether you have a question, an exciting data project, or just want to say hi, my inbox is always open. Let's find the stories behind your data together.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
+                <a href="mailto:humairaaryantik@gmail.com" class="flex items-center gap-3 px-8 py-4 bg-pink-500 text-white rounded-full font-semibold hover:bg-pink-600 transition shadow-lg shadow-pink-500/30 w-full sm:w-auto justify-center">
+                    <i class="fas fa-envelope"></i> Send an Email
+                </a>
+                <a href="https://wa.me/6282220055495" target="_blank" class="flex items-center gap-3 px-8 py-4 bg-transparent border border-blue-400 text-white rounded-full font-semibold hover:bg-white/10 transition w-full sm:w-auto justify-center">
+                    <i class="fab fa-whatsapp"></i> +62 822-2005-5495
+                </a>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex justify-center gap-8 border-t border-white/20 pt-10">
+                <a href="https://linkedin.com/in/humaira-aryantik" target="_blank" class="text-blue-200 hover:text-white transition flex flex-col items-center gap-2 group">
+                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-pink-500 transition duration-300">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </div>
+                    <span class="text-xs font-medium tracking-wide">LinkedIn</span>
+                </a>
+                <a href="https://github.com/humairaaryantik" target="_blank" class="text-blue-200 hover:text-white transition flex flex-col items-center gap-2 group">
+                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-pink-500 transition duration-300">
+                        <i class="fab fa-github text-xl"></i>
+                    </div>
+                    <span class="text-xs font-medium tracking-wide">GitHub</span>
+                </a>
+                <a href="#" class="text-blue-200 hover:text-white transition flex flex-col items-center gap-2 group">
+                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-pink-500 transition duration-300">
+                        <i class="fas fa-map-marker-alt text-xl"></i>
+                    </div>
+                    <span class="text-xs font-medium tracking-wide">South Jakarta</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-950 border-t border-white/10 py-6 text-center text-sm text-blue-300">
+        <p>&copy; 2026 Humaira Aryanti Khaidir. All rights reserved.</p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const links = document.querySelectorAll('.mobile-link');
+
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Hero Profile Photo Image Upload Logic
+        const avatarInput = document.getElementById('avatar-input');
+        const profilePreview = document.getElementById('profile-img-preview');
+        const uploadTrigger = document.getElementById('upload-trigger');
+
+        if (uploadTrigger && avatarInput && profilePreview) {
+            uploadTrigger.addEventListener('click', () => {
+                avatarInput.click();
+            });
+
+            avatarInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        profilePreview.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Horizontal Scroll Controls Function
+        function setupHorizontalScroll(trackId, leftBtnId, rightBtnId, scrollAmount = 350) {
+            const track = document.getElementById(trackId);
+            const leftBtn = document.getElementById(leftBtnId);
+            const rightBtn = document.getElementById(rightBtnId);
+
+            if (track && leftBtn && rightBtn) {
+                leftBtn.addEventListener('click', () => {
+                    track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+                rightBtn.addEventListener('click', () => {
+                    track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+            }
+        }
+
+        // Initialize Horizontal Scroll Controls
+        setupHorizontalScroll('projects-track', 'proj-scroll-left', 'proj-scroll-right', 400);
+        setupHorizontalScroll('skills-track', 'skills-scroll-left', 'skills-scroll-right', 250);
+        setupHorizontalScroll('certs-track', 'certs-scroll-left', 'certs-scroll-right', 320);
+    </script>
+</body>
+</html>
